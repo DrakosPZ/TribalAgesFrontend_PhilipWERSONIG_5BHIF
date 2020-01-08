@@ -1,0 +1,29 @@
+<div class="jumbotron">
+  <h1>Events</h1>
+  <p>Here you see all events that are being brought forth to you. This can vary from problems with different effects
+  up to gifts and extra resources.</p>
+</div>
+
+<div *ngFor="let event of events">
+  <div class="row mb-4">
+    <div class="col-lg-12">
+      <div class="card card-body bg-dark border-top-0 border-left-0 border-right-0">
+        <h3 class="text-info" >{{event.title}}</h3>
+        <p class="text-light">{{event.text}}</p>
+        <h5 class="text-light">
+          Answer Options:
+        </h5>
+
+        <div *ngFor="let answers of event.answers">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <button type="button"  class="btn-block btn btn-dark text-success mt-1" triggers="mouseenter:mouseleave"
+                      ngbPopover="{{answers.resource}} {{answers.amount}}"
+                      (click)="eventAnswerButtonClick(event.identifier, answers.identifier)">{{answers.text}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
