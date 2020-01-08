@@ -18,6 +18,12 @@ export class ProductionComponent implements OnInit {
     console.log(this.gameLoopManagerService);
     // console.log('GameLoop Content: ' + this.gameLoopManagerService.GetGameState.storage);
   }
+
+  /**
+   * Sets the refrence GameloopManager, used in the html part
+   *
+   * @param gameLoopManagerService
+   */
   public setReferenceGameLoopManager(gameLoopManagerService: GameLoopManagerService) {
     this.gameLoopManagerService = gameLoopManagerService;
   }

@@ -11,6 +11,11 @@ export class EventAnswer {
     this.amount = amount;
   }
 
+  /**
+   * Generates Test Data
+   *
+   * @param size
+   */
   public static getDateTest( size: number ): EventAnswer[] {
     const returnAnswers: EventAnswer[] = [];
     for (let i = 0; i < size; ++i) {

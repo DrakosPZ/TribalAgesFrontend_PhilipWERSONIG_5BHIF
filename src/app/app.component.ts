@@ -43,6 +43,9 @@ export class AppComponent {
     componentReference.setReferenceGameLoopManager(this.gameLoopManagerService);
   }
 
+  /**
+   * handles Continu button being pressed
+   */
   public btnPressContinue() {
     if (!this.firstTimeLoaded) {
       this.firstTimeLoaded = true;
@@ -62,6 +65,9 @@ export class AppComponent {
     }
   }
 
+  /**
+   * handles Speed button being pressed, and changes the value accordingliy
+   */
   public btnPressSpeed() {
     if (this.speedCounter === 8) {
       this.speedCounter = 1;
@@ -72,6 +78,9 @@ export class AppComponent {
     this.transportMultiplierFactor();
   }
 
+  /**
+   * Calls the Save methods upon Button Press
+   */
   public btnPressSave() {
     this.loadSaveServiceService.saveDataToServer(
       this.gameLoopManagerService.gameState
@@ -80,6 +89,9 @@ export class AppComponent {
     console.log(this.getDate());
   }
 
+  /**
+   * Calls the Load methods upon Button Press
+   */
   public btnPressLoad() {
     this.stopGameLoop();
     this.loadSaveServiceService.loadDataFromServer(this.gameLoopManagerService.gameState.identifier).subscribe(state => {
@@ -102,19 +114,31 @@ export class AppComponent {
     });
   }
 
+  /**
+   * Starts the Game's Life Cycle
+   */
   private startGameLoop() {
     this.subscription = interval(this.gameLoopManagerService.timeInterval)
       .subscribe(() => this.gameLoopManagerService.ElapseTime());
   }
 
+  /**
+   * Stops the Game's Life Cycle
+   */
   private stopGameLoop() {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * transports the displayed speed to the gameLoopManagers
+   */
   private transportMultiplierFactor() {
     this.gameLoopManagerService.stepMultiplier = this.speedCounter;
   }
 
+  /**
+   * Returns the properly ordered Date String
+   */
   public getDate(): string {
     return this.gameLoopManagerService.GetGameState.dateDay + '.'
       + this.gameLoopManagerService.GetGameState.dateMonth + '.'

@@ -27,7 +27,9 @@ export class EventHandler {
     // console.log(this._activeEvents);
   }
 
-
+  /**
+   * Generates Test Data
+   */
   public getRandomEvents(): Event[] {
     const returnAnswers: Event[] = [];
     returnAnswers.push(new Event('1', 'Event 1', 'We got some Food', 1 ,
@@ -41,6 +43,10 @@ export class EventHandler {
     return returnAnswers;
   }
 
+  /**
+   * Adds a random event of the avialbe list to the be pickable List
+   * @param size
+   */
   public getPickEvents( size: number ): Event[] {
     const returnAnswers: Event[] = [];
     for (let i = 0; i < size; ++i) {
@@ -49,7 +55,13 @@ export class EventHandler {
     return returnAnswers;
   }
 
-  /*Goes through the list of capable of picking events and checks for if they are picked*/
+  /**
+   * Goes through the list of capable of picking events and checks for if they are picked
+   * @param currentDay
+   * @param currentMonth
+   * @param currentYear
+   * @constructor
+   */
   public CheckForEventActivation(currentDay, currentMonth, currentYear) {
     // console.log('currentDay: ' + currentDay + '; currentMonth: ' + currentMonth + '; currentYear: ' + currentYear);
     return this.pendingEvents.forEach(
@@ -69,6 +81,14 @@ export class EventHandler {
     );
   }
 
+  /**
+   * Makes a Dice Throw and if the value is above the threshold, the event is activated (The closer the date is to the latest possible date
+   * the more likely it is to be triggerd)
+   * @param valueEarliestDate
+   * @param valueLastDate
+   * @param valueCurrentDate
+   * @constructor
+   */
   private AssesIfEventTriggered(valueEarliestDate, valueLastDate, valueCurrentDate): boolean {
     //console.log('ValueCurrentDate: ' + valueCurrentDate + '; valueEarliestDate: ' + valueEarliestDate);
     if (valueCurrentDate >= valueEarliestDate) {
@@ -96,6 +116,12 @@ export class EventHandler {
     return this._activeEvents;
   }
 
+  /**
+   * Upon Even answer clikced, gets the effects of the picked answers and calls the AddspecificRessource method
+   * @param eventID
+   * @param answerID
+   * @param storage
+   */
   public eventAnswerActivated(eventID, answerID, storage: Ressources) {
     let deletedEvent: Event;
     this._activeEvents.forEach( event => {

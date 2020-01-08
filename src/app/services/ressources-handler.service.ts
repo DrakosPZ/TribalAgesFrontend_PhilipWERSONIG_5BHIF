@@ -11,7 +11,12 @@ export class RessourcesHandlerService {
 
   constructor() { }
 
-
+  /**
+   * Calls the calculation method and changes the old to the new values
+   * @param populationWorkForce
+   * @param ressources
+   * @constructor
+   */
   public CheckForRessourceUpdate(populationWorkForce: number, ressources: Ressource[]) {
     ressources.forEach(x => {
       x.amount = this.calculationAlgorythm.addValues( x.amount,
@@ -21,6 +26,12 @@ export class RessourcesHandlerService {
     });
   }
 
+  /**
+   * Adjusts the values if they are over 100 so that they are proportionally spread
+   *
+   * @param ressources
+   * @constructor
+   */
   public RelativateGrowthFocuses(ressources: Ressource[]) {
     let allPercentage = 0;
     ressources.forEach(x => allPercentage += x.savedPercentage);
@@ -31,6 +42,14 @@ export class RessourcesHandlerService {
     }
   }
 
+  /**
+   * Add a ceratin amount to one ressource in the List
+   *
+   * @param ressourceName
+   * @param amount
+   * @param ressources
+   * @constructor
+   */
   public AddspecificRessource(ressourceName, amount, ressources: Ressource[]) {
     ressources.forEach(item => {
       if (item.name === ressourceName) {

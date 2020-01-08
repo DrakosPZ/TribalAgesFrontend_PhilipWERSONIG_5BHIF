@@ -21,6 +21,11 @@ export class LoadSaveServiceService {
   constructor(
     private http: HttpClient) { }
 
+  /**
+   * Makes a get Call towards the backend, to get the currently saved state.
+   *
+   * @param identifier
+   */
   public loadDataFromServer(identifier: string): Observable<State> {
     this.log('Hero Fetched');
     return this.http.get<State>(this.baseURL + '/getSavedState')
@@ -58,6 +63,10 @@ export class LoadSaveServiceService {
 
   }
 
+  /**
+   * Calls the backend to get the standrad starting State.
+   *
+   */
   public loadStandardState(): Observable<State> {
     this.log('Standard State Fetched');
     return this.http.get<State>(this.baseURL + '/getStartState')
@@ -77,6 +86,12 @@ export class LoadSaveServiceService {
       );
   }
 
+  /**
+   * Saves the current running state with a post towards the backend, and updates the identifier of the local state, with the response
+   * identifier.
+   *
+   * @param state
+   */
   public saveDataToServer(state: State): Observable<any> {
     console.log(state);
     return this.http.post(this.baseURL + '/saveState', state, this.httpOptions).pipe(
@@ -88,10 +103,18 @@ export class LoadSaveServiceService {
     );
   }
 
+  /**
+   * sets saved true
+   */
   public saved() {
     this.savedAlready = true;
   }
 
+  /**
+   * logs messages
+   *
+   * @param message
+   */
   private log(message: string) {
     console.log('LoadSafeService: ' + message );
   }

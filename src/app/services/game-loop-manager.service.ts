@@ -27,6 +27,12 @@ export class GameLoopManagerService {
     this.gameState = state;
   }
 
+  /**
+   * Checks upon being created on if a full month or year has been acomplished and updates the other values accordingly, also starts the
+   * Checking Loop.
+   *
+   * @constructor
+   */
   public ElapseTime() {
     this.gameState.dateDay = this.gameState.dateDay + 1 * this.stepMultiplier;
     if (this.gameState.dateDay > 30) {
@@ -42,6 +48,11 @@ export class GameLoopManagerService {
 
   }
 
+  /**
+   * Checks for Ressources or Event Changes
+   *
+   * @constructor
+   */
   private CheckForGameUpdate() {
     console.log('Updates To be Checked');
     // console.log(this.gameState.storage.ressources);
